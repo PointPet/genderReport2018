@@ -8,9 +8,9 @@
 \usepackage{makeidx}
 \usepackage{multirow}
 \setlength{\parindent}{0pt}
-\title{Seminar in Biometric Identification and Network Security}
-\date{5.1.2018}
-\author{Peter Pointner k1355248}
+\title{STEM Gender Gap in University Education}
+\date{June 2017}
+\author{Peter Pointner ,Thomas Sulzbacher, Yang Hua}
 
 \begin{document}
 	\pagenumbering{gobble}
@@ -21,124 +21,19 @@
 	\newpage
 	\pagenumbering{arabic}
 	\section{Abstract}
-Text Dependent Speaker Recognition [TDSR] describes an important field of biometrical identification and can be a suitable substitute for commonly used identification methods like fingerprint identification or common passwords, therefore this seminar thesis should give the reader a general overview on the functionality of those systems, their benefits and possible drawbacks. After a general Introduction to the topic of speaker recognition in general, text-dependent speaker recognition will be discussed in detail and an insight in different  used methods will be given. In the end of the paper the results of different approaches will be compared and future possibilities in research on the topic will be discussed.
-\section{Introduction}
-Voice  represents a behavioral biometric identifier as well as it can be considered as a physiological feature because of the different pitch of every person. Therefore Speaker recognition describes an important field in biometric identification In the biometric field of speaker recognition computational tasks of validating a users' claimed identity are described and further examined. These systems have to be able to recognize the speaker on the basis of individual information included in the recorded speech signal.\cite{various_techniques}.
-The most important difference to most bio-metrical identification methods, used today, is that the samples for voice recognition are captured dynamically and over a certain period of time. \cite{piezo}  
-In the last decades the research on the topic of speaker identification has increased tremendously. One important reason which makes speaker identification an interesting approach for the biometric identification is the ease of capturing speech data in high quality.
+In this paper our team focuses on the gender gap which appears in Science Technology Engineering Mathematics and Computer ,henceforth STEM, majors in university education. First of all we want to give an overview of the current situation of inscription rates in different STEM related majors at Johannes Kepler University Linz, from now on  JKU, and how the development progressed from 2002 to 2016 based on \cite{studienwahl_jku} \cite{eq_1} \cite{eq_2} \cite{eq_3}. After taking a close look at the situation in Austria we want to focus on reasons for the decisions made when choosing a university major and what different influence people are committed.
+In the next section the gender gap in STEM majors on universities in Germany is evaluated and compared against the situation in Austria. The main focus ,of the second part of this report, is to take a closer look at the international situation of the STEM gender gap. At the end of the report a conclusion of our findings will be presented.    
+ 	\section{Situation in German speaking countries}
+	\subsection{Situation at JKU}
+	\subsection{Situation in Germany}
 
-The biometric field of speaker recognition can be divided into text-dependent and a text-independent (TI) approaches. In text-independent methods speakers are modeled as distributions in the extracted feature space, not relying on the captured feature dynamics at all.  Vector Quantization or Gaussian Mixture Models capture these distributions. The task of TI speaker recognition tries to find out from which of the stored speaker distributions the newly extracted feature vector might originate from. \cite{sinogram}.
- 
-Nevertheless in this paper the focus will be on analyzing methods for text dependent (TD) speaker recognition. The basics of text-dependent speaker recognition were developed in the 1980s. With Vector Quantization known from TI systems as one dominant approach. Nowadays Artificial Neuronal Networks and i-Vectors are focused technologies for text dependent speaker recognition systems.
- \section{Vector Quantization}
-\subsection{Introduction}
-Vector Quantization (VQ) is a principle for data compression which permits low rate speech coding. The encoding of speech data to create codebooks, used for the actual speaker identification,  follows the following Scheme: First of all a long sequence of training data has to be recorded. These recordings are later on divided into frames and linear predictive analysis is performed onto each frame of the input data.  Finally the VQ-Encoder applies a clustering algorithm onto the preprocessed data to finally obtain a codebook of representative spectra.\cite{vq}
-
-These codebooks are designed to minimize the average distortion resulting from representing the training sequences.\cite{vq} \cite{compare}
-VQ is mainly text independent though appropriate selection of test data can achieve a certain level of text dependency.\cite{compare}
-
-\subsection{Data Processing and Classification}
-To capture the feature dynamics of the input signal and therefore use VQ for TD speaker recognition, one codebook has to represent each independently spoken word of the test data. This approach is called isolated word recognition (IWR). 
-To classify a unknown word  a codebook for the input data is created and correlated against the database (library) of recorded and known words. The codebook correlating the best with the input data (minimum distortion) might represent the spoken word. \cite{vq}. Another approach used to make VQ text dependent is splitting the IWR codebooks themselves to create multi-section codebooks. Therefore the length of the input data is normalized to a length of L frames and linear predictive analysis is performed onto the frames. Now the input data stream is now separated into n sections  therefore n must divide L.  Than code words for each section are created (one section has n frames) by clustering the data of several training sequences of the same  spoken word, spoken by the same person. 
-The codewords of each section form than the so called multi section codebook. For a multi word password a multi section codebook for every word has to be constructed.\cite{vq}   
-
-\begin{figure}[h!]
-	\includegraphics[width=\linewidth]{vq_priciple.jpg}
-	\caption[Vector Quantization Principle Taken from: \cite{vq_2}]{Vector Quantization Principle.}
-	\label{fig:vq}
-\end{figure}
-
-Figure \ref{fig:vq} displays the principle of Vector Quantization again. Each cluster in the figure represents a codebook. The calculated centroid is a result of the clustering and used to differentiate speakers from each other . If a user is now tested against the library, each section of the input is tested against the library. If the sample of the test data is near the centroid it will result in a small distortion therefore the section belongs to the actual codebook represented by the centroid. Otherwise the codebook won't be taken into account for determining the actual user. \cite{vq_2} 
-
-As we can see in figure \ref{fig:vq}, two problems arise when working with VQ. First a threshold has to be distinguished where test data will be still accepted representing a codebook and second the classification decisions of multiple sections and multiple words   need to be added up to gain a final classification result.
+%\begin{figure}[h!]
+%	\includegraphics[width=\linewidth]{vq_priciple.jpg}
+%	\caption[Vector Quantization Principle Taken from: \cite{vq_2}]{Vector Quantization Principle.}
+%	\label{fig:vq}
+%\end{figure}
 \newpage
-
-To find a suitable Gaussian distributed threshold the standard deviation \(\mu_{in}^i\) and the mean distortion \(\sigma_{in}^i\) for the training data of a speaker i with the associated codebook \(c_{i}\) has to be calculated.  Also the  standard deviation \(\mu_{out}^i\) and the mean distortion \(\sigma_{out}^i\) of the training data of the other users in the database  with the codebook \(c_{i}\)  have to be calculated .\cite{vq} Than the threshold can be computed as follows:
- \begin{equation}
-	T_{i}=\frac{{\mu_{in}^i}*{\sigma_{in}^i}+{\mu_{out}^i}*{\sigma_{in}^i}}{{\sigma_{in}^i}+{\sigma_{in}^i}}
-	\label{math:threshold}
-\end{equation}
-
-For the final classification decision several techniques can be taken in account. One approach is to take every single decision on every word and just sum up the acceptances and declines. If the positive decisions obtain a majority the user will be accepted and vise versa. If there is a draw between positive and negative decisions the user will be rejected. The other possibility is to weight all resulting distortions and calculate the weighted sum. This weighted sum represents a distortion on its own and can be used to calculate an overall threshold with the formula mentioned in \ref{math:threshold}. This threshold and the correlating distortion are than used for an overall decision.\cite{vq}
-
-\subsection{Performance}
-Tests of the before proposed system show that, with a training set of nine recordings, it is possible to achieve already a good false rejection rate of 0.8\% and a false acceptance rate of 1.8\%. The rates were archived using a 3 word long password with 16 acceptable users and 111 imposters. \cite{vq}  According to \cite{vq_2} the results of VQ used for speech recognition is highly dependent on the codebook size thus a high codebook rate can increase the reliability of the system significantly. Another way to increase the reliability of VQ systems is to limit the analysis only to voiced frames within the input stream.\cite{compare}
-\newpage
-\section{Text Dependent Speaker Recognition in the Time Domain}
-\subsection{Introduction}
-Most methods for text dependent speaker recognition use only spectral envelope based features such as Mel Frequency Cepstral Coefficient (MFCC) for detection thus ignoring the information in the temporal spectral  dynamics of the speech signal. Using MFCC based detection methods detection rates of 85\% can be reached with a fast recognition system. \cite{various_techniques} The paper \cite{sinogram} tries to overcome the drawback of MFCC by combining it with compressed feature dynamics derived from the sinusoidal representation of speech. 
-For a sinusoidal representation of a speech signal a spectogram can be used thus representing the frequencies included in the signal over time and conserving the spectral dynamic of the signal. A major drawback of a spectogram is the high amount of datapoints to store and to operate on therefore a compressed version of a spectogram is eligible. 
-\subsection{Data Processing and Classification}
-To minimize the data points of the spectogram a translation of a general spectogram into a speaker specific sampled version, a so called sinogram, has to be performed. The first step in the conversion into a sinogram is performing a short time Fourier Transformation onto the signal thus gaining the parameters for the sinusoidal representation of speech.
-\begin{equation}
-s(n) = \sum_{l=1}^{L(n)}A_{l}(n)\cos(\omega_{l}(n))+\phi_{l}
-\label{math:threshold}
-\end{equation}
-
-In the next step the retrieved sinusoids are tracked over time using the concept of creation and destruction of sinusoids. It should be noted that the amount of sinusoids in all analyzed frames vary from frame to frame. By arranging the retrieved sinusoids onto a time frequency plane the sinogram is formed whereas the l-th sinusoid of the K-th frame represents a point (K,\(F_{l}\)) in the plane with a magnitude reciprocal to the amplitude (\(A_{l}\)) respectively \(F_{l}\) to \(omega_{l}\). The results of the transformation can be seen in figure \ref{fig:sinogram}.
-\newpage
-\begin{figure}[h!]
-	\includegraphics[width=\linewidth]{spectogram.png}
-	\caption[Spectogram To Sinogram Conversion Taken from: \cite{sinogram} ]{Spectogram To Sinogram Conversion.}
-	\label{fig:sinogram}
-\end{figure}
-There are two major drawbacks of the proposed sinogram in \cite{sinogram}. First the sinograms still have variable length making it impossible to compare different data sets on the fly, second the sinogram still has three times more datapoints than a MFCC approach would use thus make it an unsuitable method for TD speaker recognition. 
-The solution to those major weaknesses is the introduction of a Compressed Spectral Dynamic (CSD) feature. A CSD feature minimizes the amount of used datapoint to less than 1\% compared with the plain sinogram and removes the variable length of the samples to compare different CSD features on the fly.\cite{sinogram}
-First a transformation has to be applied to the calculated sinogram to obtain a feature space. After the feature space is created, representative samples have to be chosen to finally define the CSD feature. 
-In the transformation step 2-D image interpolation is used to resize all sinograms to a given length. The next transformation has to ensure simple Euclidean distance between to features is conserved. Therefore in \cite{sinogram} the Discrete Cosine Transformation , well known from jpeg compression, was used to construct the feature space. From the feature space the DC values are removed and the top K coefficients are kept representing the CSD feature. In figure \ref{fig:CSD} the selection process can be seen. The white bubbles represent DC values which are going to be ignored. The colored bubbles represent the coefficients of the transformation and will be gathered in a zig-zag scan to form a CSD vector.
-\begin{figure}[h!]
-	\includegraphics[width=\linewidth]{csd_feature.jpg}
-	\caption[Spectogram To Sinogram Conversion Taken from: \cite{sinogram} ]{Feature selection and CSD Vector comparison}
-	\label{fig:CSD}
-\end{figure}  
-In figure \ref{fig:CSD} on the right hand side the comparison of two input CSD vectors ,representing the same text spoken by different persons, with the stored CSD vector can be seen. The Euclidean distance between two matching vectors is relatively small however the distance of the vector belonging to an imposer and the database vector is \(\sim4\) times higher thus allowing the CSD  based approach to gain low over all error rates.
-\subsection{Performance}
-For the overall system proposed in \cite{sinogram} the before described approach was combined with MFCC based TD speaker recognition. The MFCC algorithm provided a certain level of pre-evaluation of the given input signal against the database. If the input was rejected at this stage it was fully declined by the system. After the MFCC stage the input data was further analyzed using the CSD vector approach. 
-Tests with 260 speakers using 4 passwords as training sequence showed high results if compared to other methods used in TD speaker recognition as DTW-1 or DTW-4 (Dynamic Time Warping). For the test 3309 speaker identification (SI) trials and 8173 speaker verification (SV) trials (4181 imposer trials with 3309 unknown password  trials and 872 known passwords trials) have been carried out.
-The exact results are displayed in table \ref{tab:sinogram}.
-\begin{table}[!h]
-\centering
-\begin{tabular}{|l|l|l|l|l|}
-\hline
-\multicolumn{2}{|l|}{Performance in}                                       & DTW-1  & DTW-4  & CSD    \\ \hline
-\multicolumn{2}{|l|}{SI in \% Error}                   & 12\%   & 5.01\% & 0.17\% \\ \hline
-\multirow{2}{*}{SV in \% Equal Error Rate} & unknown PWD & 4.11\% & 0.38\% & 0.00\% \\ \cline{2-5} 
-                                                             & known PWD   & 9.01\% & 4.90\% & 0.10\% \\ \hline
-\end{tabular}
-\caption{Performance of the CSD feature vector method. See \cite{sinogram}}
-\label{tab:sinogram}
-\end{table}
- As table \ref{tab:sinogram} shows, very good identification results can be archived with the proposed system which are similar to other biometric identification approaches like e.g. finger print identification.
-\section{Text Dependent Speaker Identification using the Vibration of Vocal Cords}
-\subsection{Introduction}
-Most technologies use speech recordings made by microphone for determining a speakers identity. The following approach measures the vocal cords vibration directly and uses those measurements for the detection phase.\cite{piezo}  
-\subsection{Data Processing and Classification}
-When breathing (without speaking) air passes through the lungs easily passing by the open vocal cords in the larynx. When speaking electrical signals given by the brain are transmitted to the muscles of the larynx to close the vocal cords. The vocal cords are now hit by the air from the lungs however the air pressure overcomes the resistance of the vocal cords which will result in a vibration state of the vocal cords. This vibration create soundwaves, the person's voice making the vocal cords the main source of a humans voice.
-To measure these vibrations a piezoelectric transducer is fixed to a collar and wrapped around a users neck making it possible to translate the mechanical vibration of the vocal cords to an electrical signal which can be further examined. 
-As figure \ref{fig:piezo} shows the spectogram of the recorded vibrations for the same vowel spoken by different persons are not equal and thus can be used for speaker recognition. 
-\begin{figure}[h!]
-	\includegraphics[width=\linewidth]{spectogram_cords.png}
-	\caption[Vibration Signals of two speakers pronouncing the vowel a Taken from: \cite{piezo} ]{Vibration Signals of two speakers pronouncing the vowel ``a''}
-	\label{fig:piezo}
-\end{figure}  
-To process the  extracted speech signal further Fast Fourier Analysis is performed onto the data. Than the data is normalized because the magnitudes of the frequencies in the spectrum is affected by the loudness of the voice, which varies from recording to recording even for the same person being recorded.
-Next up low frequent noise is removed from the measured data.  Frequencies under a certain threshold can not be produced by a human's voice and therefore might disturb the identification process. Before the speaker can be identified, the feature extraction has to take place. Therefore meaningful frequencies of the measured spectrum have to be selected to form a feature vector which can be used for the extraction phase of the algorithm. To find these frequencies a threshold value being a certain percentage of the maximum measured amplitude. Frequencies with a magnitude higher than the threshold will be taken in account for the classification and stored in a 1-D feature vector for classification.\cite{piezo}
-
- The linear correlation between an extracted vector and a vector stored in the reference database can be calculated as seen in formula \ref{math:piezo}
-\begin{equation}
-\text{corr(X,Y)}=\frac{1}{M*N}*\sum_{i=0}^{M*N-1} \frac{X_{i}*Y_{i}-\mu_{x}\mu_{y}}{\sigma_{x}*\sigma_{y}}
-\label{math:piezo}
-\end{equation}
-\newpage
-Where x denotes the test feature vector, y the template vector, MxN the length of the extracted vector, \(\sigma\) denotes the standard deviation of the corresponding vector and \(\mu\) symbolizing the mean values of the vectors X and Y. 
-\subsection{Performance}
-Testing the proposed method showed an accuracy of 91\% using other  correlation coefficients like the Coi-Williams or the Wigner-Ville distribution led to an accuracy of \%72 respectively \%60. \cite{piezo}
-\section{Conclusion}
-The paper tried to give a basic outline on the broad topic of Text Dependent Speaker Recognition. Different technologies were presented and further analyzed. The current research on TD speaker recognition addresses more and more advanced technologies  e.g the use of artificial neural networks or i-Vectors. Basic research on TD speaker recognition using i-Vector showed that achievable  equal error rates (ERR) are around 1\% \cite{ivector} depending of the underlying model. The research in using i-Vectors on TD speaker recognition is still young and even better results could possibly be achieved.
-
-One major problem speaker recognition systems have in general is that speech data can be easily recorded in good quality and therefore giving an attacker the possibility to gain access to a system protected by speaker recognition systems. TD based speaker recognition tries to overcome the drawback by adding a text to the identification approach which might be used as second factor in the identification scheme and therefore making the system more secure. 
-\newpage
-\bibliography{seminar_thesis_speech}
+\bibliography{gender}
 \bibliographystyle{unsrt}
 \newpage
 \listoffigures
